@@ -30,6 +30,7 @@ func ShortenURL(c *fiber.Ctx) error {
 		})
 	}
 	//rate limiting
+	
 
 	//checking url
 	if !govalidator.IsURL(body.Url) {
@@ -47,5 +48,7 @@ func ShortenURL(c *fiber.Ctx) error {
 
 	//enforcing http:// before url
 	body.Url = helpers.EnforceHttp(body.Url)
+
+	return fiber.ErrBadGateway
 
 }

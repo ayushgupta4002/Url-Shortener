@@ -12,10 +12,22 @@ import (
 )
 
 func setupRoutes(app *fiber.App) {
+	app.Get("/", mainpage)
 	app.Get("/:url", routes.ResolveUrl)
 	app.Post("/api/v1", routes.ShortenURL)
 
 }
+func mainpage(c *fiber.Ctx) error {
+	err := c.JSON(fiber.Map{
+		"message": "server up and kicking",
+	})
+	if err != nil {
+		// Handle the error if needed
+		return err
+	}
+	return nil
+}
+
 func main() {
 	err := godotenv.Load()
 	if err != nil {
